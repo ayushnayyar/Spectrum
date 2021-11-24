@@ -1,10 +1,20 @@
-const express = require('express');
-const mongoose = require('mongoose');
-require('dotenv/config');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+
+import 'dotenv/config';
+
+import postRoutes from './routes/posts.js';
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+app.use('/posts', postRoutes);
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const port = process.env.PORT || 5000;
 
 // Connect to DB
 mongoose.connect(
@@ -16,6 +26,6 @@ mongoose.connect(
     () => console.log('Connected to DB')
 );
 
-app.listen(app.get('port'), () => {
+app.listen(port, () => {
     console.log(`🚀 Server running at http://localhost:${port}`);
 });
