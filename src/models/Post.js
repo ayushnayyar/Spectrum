@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const postSchema = mongoose.Schema({
+    postId: String,
     description: String,
     creator: String,
     tags: [String],
