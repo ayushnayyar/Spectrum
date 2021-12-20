@@ -6,6 +6,7 @@ import 'dotenv/config';
 
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
+import friendRequestRoutes from './routes/requests.js';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
+app.use('/friendrequest', friendRequestRoutes);
 
 const port = process.env.PORT || 5000;
 
