@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const postSchema = mongoose.Schema({
     postId: String,
+    name: String,
     description: String,
     creator: String,
     tags: [String],
@@ -10,7 +11,7 @@ const postSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
-    likedBy: [String],
+    likes: { type: [String], default: [] },
     createdAt: {
         type: Date,
         default: new Date(),

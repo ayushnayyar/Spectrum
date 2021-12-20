@@ -1,10 +1,12 @@
 import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema({
-    userId: String,
-    name: String,
-    email: String,
-    friendsUserId: [String],
+    id: { type: String },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    friendRequests: [String],
+    friends: [String],
     phone: String,
     profilePhoto: String,
     rewards: {

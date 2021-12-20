@@ -5,6 +5,7 @@ import cors from 'cors';
 import 'dotenv/config';
 
 import postRoutes from './routes/posts.js';
+import userRoutes from './routes/users.js';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/posts', postRoutes);
+app.use('/user', userRoutes);
 
 const port = process.env.PORT || 5000;
 
