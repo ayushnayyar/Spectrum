@@ -6,9 +6,10 @@ import User from '../models/user.js';
 
 export const signIn = async (req, res) => {
     const { email, password } = req.body;
+    console.log(email);
 
     try {
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ email: email });
 
         if (!existingUser) {
             return res.status(404).json({ message: "User doesn't exist" });
@@ -18,6 +19,8 @@ export const signIn = async (req, res) => {
             password,
             existingUser.password
         );
+
+        console.log(isPasswordCorrect);
 
         if (!isPasswordCorrect) {
             return res.status(400).json({ message: 'Invalid credentials' });
@@ -32,6 +35,8 @@ export const signIn = async (req, res) => {
             'test',
             { expiresIn: '1h' }
         );
+
+        console.log(token);
 
         res.status(200).json({ result: existingUser, token });
     } catch (error) {

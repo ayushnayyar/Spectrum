@@ -85,17 +85,22 @@ export const acceptFriendRequest = async (req, res) => {
         );
 
         if (friendsIndex === -1 && friendRequestsIndex !== -1) {
-            user.friends.push(friendId);
+            console.log('In');
+            user.friends.push(String(friendId));
             user.friendRequests = user.friendRequests.filter(
                 (friendRequest) => {
-                    return friendRequest !== friendId;
+                    return friendRequest !== String(friendId);
                 }
             );
         }
 
-        const updatedUser = await User.findByIdAndUpdate(id, user, {
-            new: true,
-        });
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { $set: { user } },
+            {
+                new: true,
+            }
+        );
 
         res.status(201).send(updatedUser);
     } catch (error) {
@@ -127,14 +132,18 @@ export const declineFriendRequest = async (req, res) => {
         if (friendRequestsIndex !== -1) {
             user.friendRequests = user.friendRequests.filter(
                 (friendRequest) => {
-                    return friendRequest !== friendId;
+                    return friendRequest !== String(friendId);
                 }
             );
         }
 
-        const updatedUser = await User.findByIdAndUpdate(id, user, {
-            new: true,
-        });
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { $set: { user } },
+            {
+                new: true,
+            }
+        );
 
         res.status(201).send(updatedUser);
     } catch (error) {
