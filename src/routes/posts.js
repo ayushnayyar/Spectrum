@@ -3,6 +3,7 @@ import express from 'express';
 import auth from '../middleware/auth.js';
 import {
     getPosts,
+    getUserPosts,
     createPost,
     updatePost,
     deletePost,
@@ -12,6 +13,8 @@ import {
 const router = express.Router();
 
 router.get('/', getPosts);
+
+router.post('/:id', auth, getUserPosts);
 
 router.post('/', auth, createPost);
 

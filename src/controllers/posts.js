@@ -1,4 +1,5 @@
 import Post from '../models/post.js';
+import User from '../models/user.js';
 import mongoose from 'mongoose';
 
 export const getPosts = async (req, res) => {
@@ -11,8 +12,27 @@ export const getPosts = async (req, res) => {
     }
 };
 
+export const getUserPosts = async (req, res) => {
+    // const { id } = req.params;
+    try {
+        const user = await User.findOne({ _id: req.userId });
+        console.log(user);
+
+        const posts = user.posts.map(
+            async (post) => await Post.findOne({ _id: post })
+        );
+
+        console.log(posts);
+
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
 export const createPost = async (req, res) => {
     const post = req.body;
+    // const { id } = req.params;
 
     const newPost = new Post({
         ...post,
@@ -22,9 +42,18 @@ export const createPost = async (req, res) => {
     try {
         await newPost.save();
 
+        const user = await User.findOne({ _id: req.userId });
+        user.posts = [...user.posts, newPost];
+
+        const updatedUser = await User.findByIdAndUpdate(req.userId, user, {
+            new: true,
+        });
+
+        console.log(updatedUser);
+
         res.status(201).json(newPost);
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(409).json({ message: error.message });
     }
 };

@@ -87,3 +87,15 @@ export const signUp = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 };
+
+export const getUser = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const users = await User.findOne({ _id: id });
+
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};

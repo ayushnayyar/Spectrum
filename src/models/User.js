@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Post from './post.js';
 
 const userSchema = mongoose.Schema({
     id: { type: String },
@@ -8,6 +9,9 @@ const userSchema = mongoose.Schema({
     friendRequests: [String],
     friends: [String],
     phone: String,
+    posts: {
+        type: [Object],
+    },
     profilePhoto: String,
     rewards: {
         type: Number,
