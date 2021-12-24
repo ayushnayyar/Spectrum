@@ -13,18 +13,12 @@ export const getPosts = async (req, res) => {
 };
 
 export const getUserPosts = async (req, res) => {
-    // const { id } = req.params;
+    const { id } = req.params;
+
     try {
-        const user = await User.findOne({ _id: req.userId });
-        console.log(user);
+        const user = await User.findOne({ _id: id });
 
-        const posts = user.posts.map(
-            async (post) => await Post.findOne({ _id: post })
-        );
-
-        console.log(posts);
-
-        res.status(200).json(posts);
+        res.status(200).json(user.posts);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

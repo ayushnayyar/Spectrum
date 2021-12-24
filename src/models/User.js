@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Post from './post.js';
 
 const userSchema = mongoose.Schema({
     id: { type: String },
@@ -8,6 +7,8 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     friendRequests: [String],
     friends: [String],
+    followingRequests: [String],
+    following: [String],
     phone: String,
     posts: {
         type: [Object],
