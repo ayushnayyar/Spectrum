@@ -4,6 +4,7 @@ import User from '../models/user.js';
 
 export const getFriendRequests = async (req, res) => {
     const { id } = req.params;
+
     try {
         if (!req.userId) {
             return res.json({ message: 'Unauthenticated' });
@@ -66,6 +67,7 @@ export const acceptFriendRequest = async (req, res) => {
     const { friendId } = req.body;
 
     try {
+        console.log(req.body);
         if (!req.userId) {
             return res.json({ message: 'Unauthenticated' });
         }
@@ -84,8 +86,10 @@ export const acceptFriendRequest = async (req, res) => {
             (id) => id === String(friendId)
         );
 
+        console.log(friendsIndex);
+        console.log(friendRequestsIndex);
+
         if (friendsIndex === -1 && friendRequestsIndex !== -1) {
-            console.log('In');
             user.friends.push(String(friendId));
             user.friendRequests = user.friendRequests.filter(
                 (friendRequest) => {
@@ -94,15 +98,21 @@ export const acceptFriendRequest = async (req, res) => {
             );
         }
 
-        const updatedUser = await User.findByIdAndUpdate(
-            id,
-            { $set: { user } },
-            {
-                new: true,
-            }
-        );
+        if (friendsIndex !== -1 && friendRequestsIndex !== -1) {
+            user.friendRequests = user.friendRequests.filter(
+                (friendRequest) => {
+                    return friendRequest !== String(friendId)
+                        ? friendRequest
+                        : null;
+                }
+            );
+        }
 
-        res.status(201).send(updatedUser);
+        const updatedUser = await User.findByIdAndUpdate(id, user, {
+            new: true,
+        });
+
+        res.status(201).json(updatedUser);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -149,4 +159,27 @@ export const declineFriendRequest = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+};
+
+export const removeUserFromFollowing = async (req, res) => {
+    const { id } = req.params;
+    const { removeUserId } = req.body;
+
+    try {
+        if (!req.userId) {
+            return res.json({ message: 'Unauthenticated' });
+        }
+
+        const user = await User.findOne({ _id: id });
+
+        if (!user) {
+            return res.status(404).json({ message: "User doesn't exist" });
+        }
+
+        user.following = user.following.filter(
+            (userId) => userId !== removeUserId
+        );
+
+        res.status(201).json(user.following);
+    } catch (error) {}
 };

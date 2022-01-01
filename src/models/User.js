@@ -9,6 +9,9 @@ const userSchema = mongoose.Schema({
     friends: [String],
     followingRequests: [String],
     following: [String],
+    likeCount: {
+        type: Number,
+    },
     phone: String,
     posts: {
         type: [Object],

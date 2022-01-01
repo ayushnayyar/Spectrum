@@ -8,6 +8,7 @@ import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
 import friendRequestRoutes from './routes/requests.js';
 import peopleRoutes from './routes/people.js';
+import rewardsRoutes from './routes/rewards.js';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
 app.use('/friendrequest', friendRequestRoutes);
 app.use('/people', peopleRoutes);
+app.use('/rewards', rewardsRoutes);
 
 const port = process.env.PORT || 5000;
 

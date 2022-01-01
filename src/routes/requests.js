@@ -6,6 +6,7 @@ import {
     sendFriendRequest,
     acceptFriendRequest,
     declineFriendRequest,
+    removeUserFromFollowing,
 } from '../controllers/requests.js';
 
 const router = express.Router();
@@ -17,5 +18,7 @@ router.patch('/:id/sendfriendrequest', auth, sendFriendRequest);
 router.patch('/:id/acceptfriendrequest', auth, acceptFriendRequest);
 
 router.patch('/:id/declinefriendrequest', auth, declineFriendRequest);
+
+router.patch('/:id/removefollower', auth, removeUserFromFollowing);
 
 export default router;
