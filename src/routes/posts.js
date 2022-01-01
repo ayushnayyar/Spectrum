@@ -12,7 +12,7 @@ import {
 
 const router = express.Router();
 
-router.get('/', getPosts);
+router.get('/', auth, getPosts);
 
 router.post('/:id', auth, getUserPosts);
 

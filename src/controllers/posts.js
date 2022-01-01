@@ -3,10 +3,30 @@ import User from '../models/user.js';
 import mongoose from 'mongoose';
 
 export const getPosts = async (req, res) => {
-    try {
-        const posts = await Post.find();
+    const id = req.userId;
 
-        res.status(200).json(posts.reverse());
+    try {
+        let userPosts = [];
+        const user = await User.findOne({ _id: id });
+
+        if (user.posts) {
+            user.posts.map((post) => userPosts.push(post));
+        }
+
+        const followingPosts = await Promise.all(
+            user.following.map(async (followingUser) => {
+                const following = await User.findOne({ _id: followingUser });
+                console.log(following.posts);
+                return following.posts.map((post) => userPosts.push(post));
+                // userPosts.push(following.posts);
+            })
+        );
+
+        // posts = await Post.find();
+
+        userPosts.sort((a, b) => b.createdAt - a.createdAt);
+
+        res.status(200).json(userPosts);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
