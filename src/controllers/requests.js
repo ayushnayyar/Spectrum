@@ -172,6 +172,8 @@ export const removeUserFromFollowing = async (req, res) => {
 
         const user = await User.findOne({ _id: id });
 
+        console.log(user);
+
         if (!user) {
             return res.status(404).json({ message: "User doesn't exist" });
         }
@@ -180,6 +182,12 @@ export const removeUserFromFollowing = async (req, res) => {
             (userId) => userId !== removeUserId
         );
 
+        await User.findByIdAndUpdate(id, user, { new: true });
+
+        console.log(user.following);
+
         res.status(201).json(user.following);
-    } catch (error) {}
+    } catch (error) {
+        console.log(error.message);
+    }
 };

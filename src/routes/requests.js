@@ -19,6 +19,6 @@ router.patch('/:id/acceptfriendrequest', auth, acceptFriendRequest);
 
 router.patch('/:id/declinefriendrequest', auth, declineFriendRequest);
 
-router.patch('/:id/removefollower', auth, removeUserFromFollowing);
+router.patch('/:id/removeuserfromfollowing', auth, removeUserFromFollowing);
 
 export default router;

@@ -26,6 +26,8 @@ export const getPosts = async (req, res) => {
 
         userPosts.sort((a, b) => b.createdAt - a.createdAt);
 
+        console.log(userPosts);
+
         res.status(200).json(userPosts);
     } catch (error) {
         res.status(404).json({ message: error.message });
