@@ -32,7 +32,7 @@ export const signIn = async (req, res) => {
                 id: existingUser._id,
             },
             // Generate strong secret and store in env
-            'test',
+            process.env.SECRET,
             { expiresIn: '1h' }
         );
 
@@ -78,7 +78,7 @@ export const signUp = async (req, res) => {
                 id: result._id,
             },
             // Same secret as sign in (change later)
-            'test',
+            process.env.SECRET,
             { expiresIn: '1h' }
         );
 

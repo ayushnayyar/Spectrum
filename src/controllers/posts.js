@@ -125,7 +125,17 @@ export const likePost = async (req, res) => {
         return res.status(404).send('No post with that id');
     }
 
+    const user = await User.findOne({ _id: req.userId });
+
+    let likedPost = {};
+
+    const postIndex = user.posts.findIndex((post) => post._id === id);
+
+    // user.posts[postIndex].
+
     const post = await Post.findById(id);
+
+    console.log(post);
 
     const index = post.likes.findIndex((id) => id === String(req.userId));
 
