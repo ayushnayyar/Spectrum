@@ -45,6 +45,10 @@ const Navbar = () => {
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
 
+  if (!user) {
+    return <React.Fragment />;
+  }
+
   return (
     <div className="Wrapper">
       <div className="Navbar">

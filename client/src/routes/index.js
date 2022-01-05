@@ -24,9 +24,9 @@ const Routes = () => {
             return user ? <Redirect to={HOME} /> : <Redirect to={LOGIN} />;
           }}
         />
-        <Route path={PEOPLE} component={withRouter(People)} />
-        <Route path={PROFILE} component={withRouter(Profile)} />
-        <Route path={REWARDS} component={withRouter(Rewards)} />
+        <Route exact path={PEOPLE} component={withRouter(People)} />
+        <Route exact path={PROFILE} component={withRouter(Profile)} />
+        <Route exact path={REWARDS} component={withRouter(Rewards)} />
       </Switch>
     </BrowserRouter>
   );
