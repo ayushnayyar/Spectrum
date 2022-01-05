@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 import ROUTES from '../constants/routes.js';
@@ -17,12 +17,12 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path={LOGIN} component={withRouter(Login)} />
+        <Route path={HOME} component={withRouter(Home)} />
         <Route
           path={HOME}
           render={() => {
-            return user ? withRouter(Home) : withRouter(Login);
+            return user ? <Redirect to={HOME} /> : <Redirect to={LOGIN} />;
           }}
-          component={withRouter(Home)}
         />
         <Route path={PEOPLE} component={withRouter(People)} />
         <Route path={PROFILE} component={withRouter(Profile)} />
