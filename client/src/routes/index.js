@@ -11,12 +11,19 @@ import Profile from '../pages/profile.js';
 import Rewards from '../pages/rewards.js';
 
 const Routes = () => {
+  const user = JSON.parse(localStorage.getItem('profile'));
   const { HOME, LOGIN, PEOPLE, PROFILE, REWARDS } = ROUTES;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={LOGIN} component={withRouter(Login)} />
-        <Route path={HOME} component={withRouter(Home)} />
+        <Route
+          path={HOME}
+          render={() => {
+            return user ? withRouter(Home) : withRouter(Login);
+          }}
+          component={withRouter(Home)}
+        />
         <Route path={PEOPLE} component={withRouter(People)} />
         <Route path={PROFILE} component={withRouter(Profile)} />
         <Route path={REWARDS} component={withRouter(Rewards)} />
