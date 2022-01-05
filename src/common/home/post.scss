@@ -1,0 +1,115 @@
+@import '../../constants/constants.scss';
+
+.Feed__Post {
+  display: flex;
+  flex-direction: column;
+  border-radius: $border-radius;
+  width: 100%;
+  margin-bottom: 24px;
+  background-color: $light-gray;
+  border-top: 0.15rem solid $primary-text;
+  border-bottom: 0.15rem solid $primary-text;
+}
+
+.Feed__Post__Header {
+  margin: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Feed__Post__Left {
+  display: flex;
+  flex-direction: row;
+}
+
+.Feed__Post__Header-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.FeedPost__Header-info-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: $primary-text;
+}
+
+.FeedPost__Header-info-time {
+  font-size: 0.72rem;
+  color: $secondary-text;
+}
+
+.Feed__Post__Delete {
+  float: right;
+  cursor: pointer;
+}
+
+.Feed__Post__Header-photo {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 12px;
+
+  > img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.Feed__Post__Text {
+  margin: 0 16px;
+  color: $primary-text;
+  font-size: 0.85rem;
+  font-weight: 300;
+  white-space: pre;
+  line-height: 1.1rem;
+}
+
+.Feed__Post__Photos {
+  margin: 16px 16px 0 16px;
+}
+
+.Feed__Post__Photo {
+  > img {
+    max-width: 100%;
+    border-radius: $border-radius;
+    height: auto;
+  }
+}
+
+.Feed__Post__Reactions {
+  display: flex;
+  padding: 8px 0;
+  margin: 0 16px 0px 16px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: $primary-text;
+  font-size: 0.9rem;
+  // border-top: 0.5px solid $darker-gray;
+  // border-bottom: 0.5px solid $darker-gray;
+}
+
+.Feed__Post__Reaction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+  width: 33.3%;
+  padding: 8px 0px;
+  border-radius: $border-radius;
+
+  &:hover {
+    background-color: $darker-gray;
+  }
+
+  > svg {
+    margin-right: 8px;
+    width: 20px;
+  }
+}

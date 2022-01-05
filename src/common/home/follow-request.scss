@@ -1,0 +1,64 @@
+@import '../../constants/constants.scss';
+
+.FollowRequest__Card {
+  background-color: $light-gray;
+  border-radius: $border-radius;
+  margin-top: 16px;
+  padding: 8px;
+}
+
+.FollowRequest__Content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.FollowRequest__Text {
+  font-size: 0.9rem;
+
+  > .FollowRequest__Name {
+    font-weight: 600;
+  }
+}
+
+.FollowRequest__Image {
+  width: 2.5rem;
+  margin-right: 16px;
+
+  > img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.FollowRequest__Buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  > .FollowRequest__Buttons-accept {
+    padding: 8px 12px;
+    margin: 4px;
+    border-radius: $border-radius;
+    background-color: $button-blue;
+
+    &:hover {
+      transition: 0.3s;
+      background-color: $dark-blue;
+    }
+  }
+
+  > .FollowRequest__Buttons-decline {
+    padding: 8px 12px;
+    margin: 4px;
+    border-radius: $border-radius;
+    background-color: $darker-gray;
+
+    &:hover {
+      transition: 0.3s;
+      background-color: $darkest-gray;
+    }
+  }
+}

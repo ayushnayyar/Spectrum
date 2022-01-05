@@ -1,0 +1,10 @@
+@import '../../constants/constants.scss';
+
+.Feed {
+  padding: 16px;
+  background-color: $light-gray;
+  border-radius: 0.75rem;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+}

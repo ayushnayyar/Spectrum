@@ -1,0 +1,142 @@
+@import '../../constants/constants.scss';
+
+.NavSection__Card {
+  padding-left: 24px;
+  position: sticky;
+  top: 92px;
+}
+
+.NavSection__ProfileCard {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $light-gray;
+  border-radius: $border-radius;
+  padding: 16px 20px;
+  //   box-shadow: 4px 4px 4px 0 rgba($color: $secondary-text, $alpha: 0.2);
+}
+
+.NavSection__ProfileCard-image {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 12px;
+
+  > img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.NavSection__ProfileCard-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.NavSection__ProfileCard-info-name {
+  padding: 2px;
+  color: $primary-text;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.NavSection__ProfileCard-info-username {
+  padding: 2px;
+  color: $secondary-text;
+  font-size: 0.8rem;
+}
+
+//
+// Navigation Box
+//
+
+.NavSection__Nav {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0;
+  background-color: $dark;
+  border-radius: $border-radius;
+
+  > .NavSection__Link {
+    margin: 4px 0;
+    border: 0.15rem solid $darker-gray;
+    border-radius: $border-radius;
+    cursor: pointer;
+    padding: 0px;
+    // border-radius: 0.75rem;
+    // border-left: 2px solid $light-gray;
+
+    &:hover {
+      transition: all 0.1s ease-in;
+      background-color: $navbar-dark;
+      border: 0.15rem solid $primary-text;
+    }
+
+    > .NavSection__Link-box {
+      margin: 0px 0px;
+      padding: 10px 16px;
+      // border-bottom: 0.15rem solid $primary-text;
+    }
+  }
+
+  > .NavSection__Link-active {
+    cursor: pointer;
+    color: $dark;
+    border: 0.15rem solid $dark;
+    margin: 4px 0;
+    padding: 0px;
+    // border-left: 2px solid $light-blue;
+    transition: all 0.1s linear;
+    background-color: $primary-text;
+    border-radius: $border-radius;
+
+    .NavSection__Link-text {
+      color: $dark;
+    }
+
+    > .NavSection__Link-box {
+      margin: 0px 0px;
+      padding: 10px 16px;
+      // border-bottom: 0.15rem solid $primary-text;
+    }
+  }
+}
+
+.NavSection__Link-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: $primary-text;
+}
+
+.NavSection__Link-text-active {
+  text-decoration: none;
+  color: $primary-text;
+}
+
+.NavSection__Link-box {
+  padding: 12px;
+}
+
+.NavSection__Link-inner {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  > .NavSection__Link-icon {
+    flex: 1;
+  }
+
+  > .NavSection__Link-name {
+    flex: 4;
+  }
+}
+
+.NavSection__Link-icon-inner {
+  width: 12px;
+}
+
+.NavSection__Link-text-space {
+  display: inline-block;
+  width: 8px;
+}

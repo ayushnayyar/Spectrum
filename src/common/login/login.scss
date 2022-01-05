@@ -1,0 +1,21 @@
+@import '../../constants/constants.scss';
+
+.Login__Page {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  color: $primary-text;
+  overflow-y: hidden;
+}
+
+.Login__ImageSection {
+  width: 60%;
+  min-height: 100%;
+}
+
+.Login__DetailsSection {
+  width: 40%;
+  min-height: 100%;
+  align-items: center;
+}

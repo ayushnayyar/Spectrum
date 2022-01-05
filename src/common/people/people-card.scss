@@ -1,0 +1,41 @@
+@import '../../constants/constants.scss';
+
+.PeopleCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-radius: $border-radius;
+  background-color: $light-gray;
+  color: $primary-text;
+  margin-bottom: 16px;
+}
+
+.PeopleCard__Details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.PeopleCard__Image {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 12px;
+
+  > img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.PeopleCard__Name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.PeopleCard__Button {
+  font-size: 0.8rem;
+  color: $red;
+  cursor: pointer;
+}

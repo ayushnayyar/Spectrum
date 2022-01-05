@@ -1,0 +1,8 @@
+@import './../constants/constants.scss';
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: $dark;
+  font-family: $font-family;
+}

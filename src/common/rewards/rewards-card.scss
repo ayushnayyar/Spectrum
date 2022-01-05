@@ -1,0 +1,85 @@
+@import '../../constants/constants.scss';
+
+.RewardsCard {
+  color: $primary-text;
+  background-color: $light-gray;
+  border-radius: $border-radius;
+
+  > .RewardsCard__Heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+  }
+}
+
+.RewardsCard__RewardsSection {
+  padding: 8px 16px 0 16px;
+}
+
+.RewardsCard__RewardsHeading {
+  color: $secondary-text;
+  font-size: 1rem;
+}
+
+.RewardsCard__Rewards {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.RewardsCard__RewardsCount {
+  font-size: 2.5rem;
+  margin-right: 2px;
+}
+
+.RewardsCard__RewardsToken {
+  font-size: 1rem;
+}
+
+.RewardsCard__Stats {
+  padding: 0 16px 16px 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.RewardsCard__Stats__Posts,
+.RewardsCard__Stats__Likes,
+.RewardsCard__Stats__AverageLikes,
+.RewardsCard__Stats__Followers {
+  margin-right: 16px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.RewardsCard__Stats__Posts-heading,
+.RewardsCard__Stats__Likes-heading,
+.RewardsCard__Stats__AverageLikes-heading,
+.RewardsCard__Stats__Followers-heading {
+  margin-bottom: 8px;
+  color: $secondary-text;
+  font-size: 1rem;
+}
+
+.RewardsCard__Stats__Posts-count,
+.RewardsCard__Stats__Likes-count,
+.RewardsCard__Stats__AverageLikes-count,
+.RewardsCard__Stats__Followers-count {
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+// .RewardsCard__Stats__Likes {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .RewardsCard__Stats__AverageLikes {
+//   display: flex;
+//   flex-direction: column;
+// }

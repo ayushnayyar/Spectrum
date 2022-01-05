@@ -1,0 +1,107 @@
+@import '../../constants/constants.scss';
+
+.Wrapper {
+  position: sticky;
+  top: 0;
+  background-color: $navbar-dark;
+  padding: 0 7.5%;
+  opacity: 0.925;
+}
+
+.Navbar {
+  margin: 0 auto;
+  display: flex;
+  font-family: sans-serif;
+  color: $primary-text;
+  padding: 16px 24px;
+}
+
+.Navbar__Items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Navbar__Items--right {
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.Navbar__Link {
+  cursor: pointer;
+  padding-right: 8px;
+}
+
+.Navbar__Link-toggle {
+  display: none;
+}
+
+.Navbar-avatar {
+  height: 2rem;
+  width: 2rem;
+  margin-left: 8px;
+
+  > img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.Navbar-button {
+  > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    background-color: rgba($color: $button-blue, $alpha: 1);
+    border: none;
+    color: $primary-text;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-weight: 600;
+
+    > svg {
+      margin-right: 4px;
+    }
+  }
+}
+
+.Navbar-brand {
+  font-size: 1.25rem;
+  letter-spacing: 0.25rem;
+  font-weight: 600;
+}
+
+// @media only screen and (max-width: 768px) {
+//   .Navbar__Items,
+//   .Navbar {
+//     flex-direction: column;
+//   }
+
+//   .Navbar__Items {
+//     display: none;
+//   }
+
+//   .Navbar__Items--right {
+//     margin-left: 0;
+//   }
+
+//   .Navbar__Link-toggle {
+//     align-self: flex-end;
+//     display: initial;
+//     transition: all 2s ease-out;
+//     position: absolute;
+//     cursor: pointer;
+//   }
+
+//   .Navbar__ToggleShow {
+//     display: flex;
+//     transition: all 3s ease-out;
+//   }
+// }

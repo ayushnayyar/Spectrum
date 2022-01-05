@@ -1,0 +1,92 @@
+@import '../../constants/constants.scss';
+
+.ProfileSection__ProfileCard {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $light-gray;
+  border-radius: $border-radius;
+  padding: 0px 20px 16px 20px;
+  //   box-shadow: 4px 4px 4px 0 rgba($color: $secondary-text, $alpha: 0.2);
+}
+
+.ProfileSection__ProfileCard-info-section {
+  display: flex;
+  flex-direction: row;
+  flex: 100;
+  justify-content: space-between;
+  color: $primary-text;
+  font-size: 1rem;
+}
+
+.ProfileSection__ProfileCard-image {
+  width: 6rem;
+  height: 6rem;
+  margin-right: 24px;
+
+  > img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.ProfileSection__ProfileCard-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ProfileSection__ProfileCard-info-name {
+  padding: 2px;
+  color: $primary-text;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.ProfileSection__ProfileCard-info-username {
+  padding: 2px;
+  color: $secondary-text;
+  font-size: 1rem;
+}
+
+.ProfileSection__ProfileCard-stats {
+  display: flex;
+  flex-direction: row;
+}
+
+.ProfileSection__ProfileCard-posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+  font-weight: 500;
+}
+
+.ProfileSection__ProfileCard-posts-heading,
+.ProfileSection__ProfileCard-followers-heading,
+.ProfileSection__ProfileCard-following-heading {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: $secondary-text;
+}
+
+.ProfileSection__ProfileCard-followers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 12px;
+  margin-right: 12px;
+  font-weight: 500;
+}
+
+.ProfileSection__ProfileCard-following {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 12px;
+  font-weight: 500;
+}
