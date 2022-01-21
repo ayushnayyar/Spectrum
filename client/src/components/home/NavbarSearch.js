@@ -65,7 +65,9 @@ const NavbarSearch = () => {
                     console.log('c');
                     dispatch(sendFriendRequest(user._id, searchedUser._id));
                   }}
-                  className="Navbar__Search__Result"
+                  className={`Navbar__Search__Result ${
+                    isInputFocused ? 'show' : 'hide'
+                  }`}
                   key={searchedUser._id}
                 >
                   {searchedUser.name}

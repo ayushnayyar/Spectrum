@@ -39,17 +39,19 @@ const RewardsCard = () => {
         <div className="RewardsCard__Stats__Followers">
           <div className="RewardsCard__Stats__Followers-heading">Followers</div>
           <div className="RewardsCard__Stats__Followers-count">
-            {user?.result.friends.length}
+            {user?.result?.followingCount
+              ? user.result.followersCount
+              : user.result.friends.length}
           </div>
         </div>
-        <div className="RewardsCard__Stats__AverageLikes">
+        {/* <div className="RewardsCard__Stats__AverageLikes">
           <div className="RewardsCard__Stats__AverageLikes-heading">
             Average Likes
           </div>
           <div className="RewardsCard__Stats__AverageLikes-count">
             {rewards / user?.result.likeCount}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

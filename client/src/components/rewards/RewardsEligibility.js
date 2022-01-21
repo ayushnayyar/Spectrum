@@ -6,21 +6,19 @@ import { getRewards } from '../../actions/rewards';
 const RewardsEligibility = () => {
   const dispatch = useDispatch();
   const rewards = useSelector((state) => state.rewards);
-  const posts = useSelector((state) => state.posts);
   const user = JSON.parse(localStorage.getItem('profile'));
 
   let eligibilityText;
 
   console.log(rewards);
-  console.log(posts);
 
   useEffect(() => {
     dispatch(getRewards(user?.result._id));
   }, [dispatch]);
 
-  if (posts.length < 25 && user?.likeCount !== null) {
-    if (posts.length > 25 && user?.likeCount < 1000) {
-      let likeCount = user?.likeCount;
+  if (user.result.followersCount !== null && user?.result.likeCount !== null) {
+    if (user.result.followersCount > 500 && user?.result.likeCount < 1000) {
+      let likeCount = user?.result.likeCount;
 
       if (isNaN(likeCount)) {
         likeCount = 0;
@@ -28,22 +26,36 @@ const RewardsEligibility = () => {
 
       eligibilityText = `You don't meet the minimum requirements for earning rewards. You
       need ${1000 - likeCount} more likes!`;
-    } else if (posts.length < 25 && user?.likeCount > 1000) {
+    } else if (
+      user.result.followersCount < 500 &&
+      user?.result.likeCount > 1000
+    ) {
+      let followersCount = user?.result.followersCount;
+
+      if (isNaN(followersCount)) {
+        followersCount = user?.result.friends?.length;
+      }
+
       eligibilityText = `You don't meet the minimum requirements for earning rewards. You
-        need ${25 - posts.length} more posts!`;
+        need ${500 - followersCount} more followers!`;
     } else {
-      let likeCount = user?.likeCount;
+      let likeCount = user?.result.likeCount;
+      let followersCount = user?.result.followersCount;
 
       if (isNaN(likeCount)) {
         likeCount = 0;
       }
 
+      if (isNaN(followersCount)) {
+        followersCount = user?.result.friends.length;
+      }
+
       eligibilityText = `You don't meet the minimum requirements for earning rewards. You
-      need ${1000 - likeCount} more likes, and ${25 - posts.length} more
-      posts!`;
+      need ${1000 - likeCount} more likes, and ${500 - followersCount} more
+      followers!`;
     }
   } else {
-    if (user?.likeCount > 25 && user?.likeCount > 1000) {
+    if (user?.result.followersCount > 500 && user?.result.likeCount > 1000) {
       eligibilityText =
         'You are eligible for rewards! Rewards Rate: 0.001 Kin per 1k likes.';
     }
