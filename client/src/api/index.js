@@ -63,3 +63,6 @@ export const getFollowing = (id) => API.post(`/people/${id}/getfollowing`);
 export const getFollowers = (id) => API.post(`/people/${id}/getfollowers`);
 
 export const getRewards = (id) => API.get(`/rewards/${id}`);
+
+export const searchUsers = (searchTerm, limit) =>
+  API.post(`/search/users?searchterm=${searchTerm}&limit=${limit}`);

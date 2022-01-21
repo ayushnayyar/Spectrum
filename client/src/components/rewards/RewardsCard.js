@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import '../../common/rewards/rewards-card.scss';
 import SectionHeading from '../../components/SectionHeading';
 import { getRewards } from '../../actions/rewards';
 

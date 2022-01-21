@@ -5,7 +5,8 @@
   top: 0;
   background-color: $navbar-dark;
   padding: 0 7.5%;
-  opacity: 0.925;
+  opacity: 0.98;
+  z-index: 1;
 }
 
 .Navbar {
@@ -48,6 +49,20 @@
   }
 }
 
+.Navbar__Dropdown-content {
+  display: none;
+
+  &:hover {
+    display: block;
+  }
+}
+
+.Navbar-avatar-image:hover {
+  + .Navbar__Dropdown-content {
+    display: block;
+  }
+}
+
 .Navbar-button {
   > button {
     display: flex;
@@ -73,8 +88,84 @@
 }
 
 .Navbar-brand {
-  font-size: 1.25rem;
-  letter-spacing: 0.25rem;
+  font-size: 2rem;
+  letter-spacing: 0.15rem;
+  // font-weight: 600;
+  font-family: 'Neonderthaw', cursive;
+}
+
+// Navbar Search
+
+.Navbar__Search__Container {
+  position: relative;
+  display: inline-block;
+}
+
+.Navbar__Search {
+  margin-right: 32px;
+  width: 250px;
+  color: $primary-text;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: $navbar-dark;
+  padding: 10px;
+  outline: none;
+  border: 2px solid transparent;
+  border-bottom: 2px solid $secondary-text;
+  transition: ease 0.2s;
+}
+
+.Navbar__Search:focus {
+  transition: ease 0.2s;
+  border-radius: $border-radius;
+  border: 2px solid $primary-text;
+}
+
+.Navbar__Search__Box {
+  width: 250px;
+  padding: 8px;
+  background-color: $light-gray;
+  position: absolute;
+}
+
+.Navbar__Search__Result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  cursor: default;
+  font-size: 14px;
+  background-color: $light-gray;
+  border: 2px solid transparent;
+  border-radius: $border-radius;
+  z-index: 2;
+
+  &:hover {
+    border: 2px solid $lighter-gray;
+    transition: ease 0.1s;
+  }
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.Navbar__Search__FollowButton {
+  width: 100px;
+  height: auto;
+  background-color: rgba($color: $button-blue, $alpha: 1);
+  border: none;
+  color: $primary-text;
+  padding: 6px 6px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.7rem;
+  border-radius: $border-radius;
+  cursor: pointer;
   font-weight: 600;
 }
 

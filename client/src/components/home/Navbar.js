@@ -7,12 +7,14 @@ import '../../common/home/navbar.scss';
 import { LOGOUT, RESET } from '../../constants/actionTypes';
 import Routes from '../../constants/routes';
 import Avatar from '../../assets/images/man.png';
-import Plus from '../../assets/icons/Plus.js';
+// import Plus from '../../assets/icons/Plus.js';
 import Menu from './Menu';
+import NavbarSearch from './NavbarSearch';
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [isActive, setActive] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -64,17 +66,15 @@ const Navbar = () => {
           >
             Spectrum
           </div>
-
-          {/* <div className="Navbar__Link">Test Link 1</div>
-          <div className="Navbar__Link">Test Link 2</div>
-          <div className="Navbar__Link">Test Link 3</div> */}
         </nav>
         <nav
           className={`${
             isActive ? 'Navbar__ToggleShow' : null
           } Navbar__Items Navbar__Items--right`}
         >
-          <div className="Navbar__Link Navbar-button">
+          <NavbarSearch />
+
+          {/* <div className="Navbar__Link Navbar-button">
             <button
               onClick={() => {
                 console.log('Clicked');
@@ -83,11 +83,15 @@ const Navbar = () => {
               <Plus />
               Create
             </button>
+          </div> */}
+          <div onClick={logout} className="Navbar__Link Navbar-avatar">
+            <div className="Navbar-avatar-image Navbar-avatar">
+              <img src={Avatar} />
+            </div>
+            <div className="Navbar__Dropdown-content">
+              <div className="Navbar__Dropdown-link">Logout</div>
+            </div>
           </div>
-          <div onClick={() => logout()} className="Navbar__Link Navbar-avatar">
-            <img src={Avatar} />
-          </div>
-          {/* <div className="Navbar__Link">Right Link 2</div> */}
         </nav>
       </div>
     </div>

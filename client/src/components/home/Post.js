@@ -8,8 +8,8 @@ import { deletePost, likePost } from '../../actions/posts';
 import Avatar from '../../assets/images/man.png';
 // import Laptop from '../../assets/images/laptop.jpg';
 import Like from '../../assets/icons/Like';
-import Comment from '../../assets/icons/Comment';
-import Share from '../../assets/icons/Share';
+// import Comment from '../../assets/icons/Comment';
+// import Share from '../../assets/icons/Share';
 import Bin from '../../assets/icons/Bin';
 
 import '../../common/home/post.scss';
@@ -88,14 +88,14 @@ const Post = ({ post }) => {
         >
           <Likes />
         </div>
-        <div className="Feed__Post__Reaction">
+        {/* <div className="Feed__Post__Reaction">
           <Comment />
           Comment
         </div>
         <div className="Feed__Post__Reaction">
           <Share />
           Share
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -19,6 +19,7 @@ export const getFriendRequests = (id) => async (dispatch) => {
 export const sendFriendRequest = (id, friendId) => async (dispatch) => {
   try {
     const { data } = await api.sendFriendRequest(id, friendId);
+    console.log(data);
 
     dispatch({ type: SEND_FRIEND_REQUEST, payload: data });
   } catch (error) {
