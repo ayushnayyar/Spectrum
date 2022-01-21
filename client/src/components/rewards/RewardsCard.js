@@ -39,7 +39,7 @@ const RewardsCard = () => {
         <div className="RewardsCard__Stats__Followers">
           <div className="RewardsCard__Stats__Followers-heading">Followers</div>
           <div className="RewardsCard__Stats__Followers-count">
-            {user?.result?.followingCount
+            {user?.result?.followersCount > 0
               ? user.result.followersCount
               : user.result.friends.length}
           </div>

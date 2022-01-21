@@ -28,7 +28,7 @@ const People = () => {
           );
         })
       ) : (
-        <React.Fragment />
+        <h3 className="People__NoFollowers">You don&apos;t follow anyone.</h3>
       )}
     </div>
   );

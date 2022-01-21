@@ -18,6 +18,7 @@ import { deleteUserPost } from '../../actions/userPosts';
 const Post = ({ post }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
+  console.log(post);
 
   const Likes = () => {
     if (post?.likes?.length > 0) {
@@ -26,12 +27,12 @@ const Post = ({ post }) => {
       ) ? (
         <React.Fragment>
           <Like color={post.likes.length > 0 ? '#e72f2f' : '#282828'} />
-          &nbsp;<React.Fragment>{post.likes.length}</React.Fragment>
+          &nbsp;<React.Fragment>{post.likeCount}</React.Fragment>
         </React.Fragment>
       ) : (
         <React.Fragment>
           <Like />
-          &nbsp;{post.likes.length}
+          &nbsp;{post.likeCount}
         </React.Fragment>
       );
     }
@@ -39,7 +40,7 @@ const Post = ({ post }) => {
     return (
       <React.Fragment>
         <Like color={post?.likes?.length > 0 ? '#e72f2f' : '#282828'} />
-        &nbsp;0
+        &nbsp;{post.likeCount}
       </React.Fragment>
     );
   };

@@ -38,7 +38,10 @@ const RewardsEligibility = () => {
 
       eligibilityText = `You don't meet the minimum requirements for earning rewards. You
         need ${500 - followersCount} more followers!`;
-    } else {
+    } else if (
+      user.result.followersCount < 500 &&
+      user.result.likeCount < 1000
+    ) {
       let likeCount = user?.result.likeCount;
       let followersCount = user?.result.followersCount;
 
@@ -53,11 +56,9 @@ const RewardsEligibility = () => {
       eligibilityText = `You don't meet the minimum requirements for earning rewards. You
       need ${1000 - likeCount} more likes, and ${500 - followersCount} more
       followers!`;
-    }
-  } else {
-    if (user?.result.followersCount > 500 && user?.result.likeCount > 1000) {
+    } else {
       eligibilityText =
-        'You are eligible for rewards! Rewards Rate: 0.001 Kin per 1k likes.';
+        'You are eligible for rewards! Rewards Rate: 1 Kin per like.';
     }
   }
 
