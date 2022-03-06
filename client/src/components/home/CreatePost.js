@@ -51,7 +51,7 @@ const CreatePost = () => {
     };
   };
 
-  if (!user?.result?.name) {
+  if (!user?.result?._id) {
     return <h3>Please sign in to post.</h3>;
   }
 
