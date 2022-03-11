@@ -37,7 +37,9 @@ export const signIn = async (req, res) => {
 
     console.log(token);
 
-    const sendResponse = { _id: existingUser._id };
+    const sendResponse = {
+      _id: existingUser._id,
+    };
 
     res.status(200).json({ result: sendResponse, token });
   } catch (error) {
@@ -86,9 +88,10 @@ export const signUp = async (req, res) => {
         email: result.email,
         id: result._id,
       },
+
       // Same secret as sign in (change later)
       process.env.SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "14d" }
     );
 
     const sendResponse = { _id: result._id };
