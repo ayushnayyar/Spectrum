@@ -5,13 +5,10 @@ const userSchema = mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  friendRequests: [String],
-  friends: [String],
-  followersCount: {
-    type: Number,
-  },
-  followingRequests: [String],
+  followRequests: [String],
+  followers: [String],
   following: [String],
+  followingRequests: [String],
   likeCount: {
     type: Number,
   },
