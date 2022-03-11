@@ -1,24 +1,33 @@
-import express from 'express';
+import express from "express";
 
-import auth from '../middleware/auth.js';
+import auth from "../middleware/auth.js";
 import {
-    getFriendRequests,
-    sendFriendRequest,
-    acceptFriendRequest,
-    declineFriendRequest,
-    removeUserFromFollowing,
-} from '../controllers/requests.js';
+  getFollowRequests,
+  getFollowingRequests,
+  sendFollowingRequest,
+  acceptFollowRequest,
+  removeFromFollowing,
+  removeFromFollowers,
+  declineFollowRequest,
+  deleteFollowingRequest,
+} from "../controllers/requests.js";
 
 const router = express.Router();
 
-router.post('/:id/getfriendrequests', auth, getFriendRequests);
+router.get("/:id/get-follow-requests", auth, getFollowRequests);
 
-router.patch('/:id/sendfriendrequest', auth, sendFriendRequest);
+router.get("/:id/get-following-requests", auth, getFollowingRequests);
 
-router.patch('/:id/acceptfriendrequest', auth, acceptFriendRequest);
+router.patch("/:id/send-following-request", auth, sendFollowingRequest);
 
-router.patch('/:id/declinefriendrequest', auth, declineFriendRequest);
+router.patch("/:id/delete-following-request", auth, deleteFollowingRequest);
 
-router.patch('/:id/removeuserfromfollowing', auth, removeUserFromFollowing);
+router.patch("/:id/accept-follow-request", auth, acceptFollowRequest);
+
+router.patch("/:id/decline-follow-request", auth, declineFollowRequest);
+
+router.patch("/:id/remove-from-following", auth, removeFromFollowing);
+
+router.patch("/:id/remove-from-followers", auth, removeFromFollowers);
 
 export default router;

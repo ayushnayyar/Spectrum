@@ -8,7 +8,7 @@ import "dotenv/config";
 
 import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/users.js";
-import friendRequestRoutes from "./routes/requests.js";
+import requestRoutes from "./routes/requests.js";
 import peopleRoutes from "./routes/people.js";
 import rewardsRoutes from "./routes/rewards.js";
 import searchRoutes from "./routes/search.js";
@@ -42,7 +42,7 @@ app.use(cors());
 
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
-app.use("/friendrequest", friendRequestRoutes);
+app.use("/requests", requestRoutes);
 app.use("/people", peopleRoutes);
 app.use("/rewards", rewardsRoutes);
 app.use("/search", searchRoutes);
