@@ -48,6 +48,52 @@ export const getFollowingRequests = async (req, res) => {
   }
 };
 
+export const getFollowing = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (!req.userId) {
+      return res.json({ message: "Unauthenticated" });
+    }
+
+    const user = await User.findOne({ _id: id });
+
+    const followingData = await Promise.all(
+      user.following.map(async (followingUserId) => {
+        const followingUser = await User.findOne({ _id: followingUserId });
+        return { name: followingUser.name, id: followingUserId };
+      })
+    );
+
+    res.status(201).json(followingData);
+  } catch (error) {
+    res.sendStatus(404).json({ message: "Something went wrong" });
+  }
+};
+
+export const getFollowers = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (!req.userId) {
+      return res.json({ message: "Unauthenticated" });
+    }
+
+    const user = await User.findOne({ _id: id });
+
+    const followersData = await Promise.all(
+      user.followers.map(async (followerId) => {
+        const follower = await User.findOne({ _id: followerId });
+        return { name: follower.name, id: followerId };
+      })
+    );
+
+    res.status(201).json(followersData);
+  } catch (error) {
+    res.sendStatus(404).json({ message: "Something went wrong" });
+  }
+};
+
 export const sendFollowingRequest = async (req, res) => {
   const { id } = req.params;
   const { followId } = req.body;

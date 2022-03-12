@@ -8,6 +8,12 @@ export const getFollowingRequests = (id) =>
 export const getFollowRequests = (id) =>
   API.get(`${requestUrl}/${id}/get-follow-requests`);
 
+export const getFollowing = (id) =>
+  API.get(`${requestUrl}/${id}/get-following`);
+
+export const getFollowers = (id) =>
+  API.get(`${requestUrl}/${id}/get-followers`);
+
 export const sendFollowingRequest = (id, followId) =>
   API.patch(`${requestUrl}/${id}/send-following-request`, {
     followId: followId,

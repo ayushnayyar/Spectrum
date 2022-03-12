@@ -25,7 +25,7 @@ export const getPosts = async (req, res) => {
     }
     // posts = await Post.find();
 
-    userPosts.sort((a, b) => b.createdAt - a.createdAt);
+    // userPosts.length && userPosts.sort((a, b) => b.createdAt - a.createdAt);
 
     res.status(200).json(userPosts);
   } catch (error) {

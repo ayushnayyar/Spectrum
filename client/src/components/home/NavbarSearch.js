@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import { searchUsers } from '../../api';
-import { sendFriendRequest } from '../../actions/requests';
+import { Actions } from '../../actions';
 
 const user = JSON.parse(localStorage.getItem('profile'));
 
@@ -63,7 +63,9 @@ const NavbarSearch = () => {
                 <div
                   onClick={() => {
                     console.log('c');
-                    dispatch(sendFriendRequest(user._id, searchedUser._id));
+                    dispatch(
+                      Actions.sendFollowingRequest(user._id, searchedUser._id)
+                    );
                   }}
                   className="Navbar__Search__Result"
                   key={searchedUser._id}

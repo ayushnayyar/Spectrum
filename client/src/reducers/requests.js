@@ -11,6 +11,16 @@ const initialState = {
     loading: false,
     error: null,
   },
+  fetchFollowingState: {
+    following: [],
+    loading: false,
+    error: null,
+  },
+  fetchFollowersState: {
+    followers: [],
+    loading: false,
+    error: null,
+  },
   sendFollowRequestState: {
     message: '',
     loading: false,
@@ -96,7 +106,62 @@ export default (state = initialState, action) => {
         ...state,
         fetchFollowRequestsState: {
           ...state.fetchFollowRequestsState,
+          loading: false,
+          error: action.payload,
+        },
+      };
 
+    // FETCH_FOLLOWING
+    case ActionTypes.FETCHING_FOLLOWING:
+      return {
+        ...state,
+        fetchFollowingState: {
+          ...state.fetchFollowingState,
+          loading: true,
+        },
+      };
+    case ActionTypes.FETCH_FOLLOWING_SUCCESS:
+      return {
+        ...state,
+        fetchFollowingState: {
+          ...state.fetchFollowingState,
+          loading: false,
+          following: action.payload,
+        },
+      };
+    case ActionTypes.FETCH_FOLLOWING_FAILURE:
+      return {
+        ...state,
+        fetchFollowingState: {
+          ...state.fetchFollowingState,
+          loading: false,
+          error: action.payload,
+        },
+      };
+
+    // FETCH_FOLLOWERS
+    case ActionTypes.FETCHING_FOLLOWERS:
+      return {
+        ...state,
+        fetchFollowersState: {
+          ...state.fetchFollowersState,
+          loading: true,
+        },
+      };
+    case ActionTypes.FETCH_FOLLOWERS_SUCCESS:
+      return {
+        ...state,
+        fetchFollowersState: {
+          ...state.fetchFollowersState,
+          loading: false,
+          followers: action.payload,
+        },
+      };
+    case ActionTypes.FETCH_FOLLOWERS_FAILURE:
+      return {
+        ...state,
+        fetchFollowersState: {
+          ...state.fetchFollowersState,
           loading: false,
           error: action.payload,
         },

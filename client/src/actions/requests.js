@@ -2,11 +2,17 @@ import * as api from '../api/requests';
 
 export const requestsActionTypes = {
   FETCHING_FOLLOWING_REQUESTS: 'FETCHING_FOLLOWING_REQUESTS',
-  FETCH_FOLLOWING_REQUESTS_SUCCESS: 'FETCH_FOLLOW_REQUESTS_SUCCESS',
+  FETCH_FOLLOWING_REQUESTS_SUCCESS: 'FETCH_FOLLOWING_REQUESTS_SUCCESS',
   FETCH_FOLLOWING_REQUESTS_FAILURE: 'FETCH_FOLLOW_REQUESTS_FAILURE',
   FETCHING_FOLLOW_REQUESTS: 'FETCHING_FOLLOW_REQUESTS',
   FETCH_FOLLOW_REQUESTS_SUCCESS: 'FETCH_FOLLOW_REQUESTS_SUCCESS',
   FETCH_FOLLOW_REQUESTS_FAILURE: 'FETCH_FOLLOW_REQUESTS_FAILURE',
+  FETCHING_FOLLOWING: 'FETCHING_FOLLOWING',
+  FETCH_FOLLOWING_SUCCESS: 'FETCH_FOLLOWING_SUCCESS',
+  FETCH_FOLLOWING_FAILURE: 'FETCH_FOLLOWING_FAILURE',
+  FETCHING_FOLLOWERS: 'FETCHING_FOLLOWERS',
+  FETCH_FOLLOWERS_SUCCESS: 'FETCH_FOLLOWERS_SUCCESS',
+  FETCH_FOLLOWERS_FAILURE: 'FETCH_FOLLOWERS_FAILURE',
   SENDING_FOLLOWING_REQUEST: 'SENDING_FOLLOWING_REQUEST',
   SEND_FOLLOWING_REQUEST_SUCCESS: 'SEND_FOLLOWING_REQUEST_SUCCESS',
   SEND_FOLLOWING_REQUEST_FAILURE: 'SEND_FOLLOWING_REQUEST_FAILURE',
@@ -33,21 +39,12 @@ export const requestsActions = {
   fetchFollowingRequests: (id) => (dispatch) => {
     const request = api.getFollowingRequests(id);
 
-    dispatch({
-      type: requestsActionTypes.FETCHING_FOLLOWING_REQUESTS,
-    });
+    dispatch(requestsActions.fetchingFollowingRequests());
 
     request.then(
       (response) =>
-        dispatch({
-          type: requestsActionTypes.FETCH_FOLLOWING_REQUESTS_SUCCESS,
-          payload: response.data,
-        }),
-      (error) =>
-        dispatch({
-          type: requestsActionTypes.FETCH_FOLLOWING_REQUESTS_FAILURE,
-          payload: error,
-        })
+        dispatch(requestsActions.fetchFollowingRequestsSuccess(response)),
+      (error) => dispatch(requestsActions.fetchFollowingRequestsFailure(error))
     );
   },
   fetchingFollowingRequests: () => {
@@ -72,21 +69,13 @@ export const requestsActions = {
   fetchFollowRequests: (id) => (dispatch) => {
     const request = api.getFollowRequests(id);
 
-    dispatch({
-      type: requestsActionTypes.FETCHING_FOLLOW_REQUESTS,
-    });
+    dispatch(requestsActions.fetchingFollowRequests());
 
     request.then(
-      (response) =>
-        dispatch({
-          type: requestsActionTypes.FETCH_FOLLOW_REQUESTS_SUCCESS,
-          payload: response.data,
-        }),
-      (error) =>
-        dispatch({
-          type: requestsActionTypes.FETCH_FOLLOW_REQUESTS_FAILURE,
-          payload: error,
-        })
+      (response) => {
+        dispatch(requestsActions.fetchFollowRequestsSuccess(response.data));
+      },
+      (error) => dispatch(requestsActions.fetchFollowRequestsFailure(error))
     );
   },
   fetchingFollowRequests: () => {
@@ -107,25 +96,78 @@ export const requestsActions = {
     };
   },
 
+  // FETCH_FOLLOWING
+  fetchFollowing: (id) => (dispatch) => {
+    const request = api.getFollowing(id);
+
+    dispatch(requestsActions.fetchingFollowing());
+
+    request.then(
+      (response) =>
+        dispatch(requestsActions.fetchFollowingSuccess(response.data)),
+      (error) => dispatch(requestsActions.fetchFollowingFailure(error))
+    );
+  },
+  fetchingFollowing: () => {
+    return {
+      type: requestsActionTypes.FETCHING_FOLLOWING,
+    };
+  },
+  fetchFollowingSuccess: (payload) => {
+    return {
+      type: requestsActionTypes.FETCH_FOLLOWING_SUCCESS,
+      payload,
+    };
+  },
+  fetchFollowingFailure: (payload) => {
+    return {
+      type: requestsActionTypes.FETCH_FOLLOWING_FAILURE,
+      payload,
+    };
+  },
+
+  // FETCH_FOLLOWERS
+  fetchFollowers: (id) => (dispatch) => {
+    const request = api.getFollowers(id);
+
+    dispatch(requestsActions.fetchingFollowers());
+
+    request.then(
+      (response) =>
+        dispatch(requestsActions.fetchFollowersSuccess(response.data)),
+      (error) => dispatch(requestsActions.fetchFollowersFailure(error))
+    );
+  },
+  fetchingFollowers: () => {
+    return {
+      type: requestsActionTypes.FETCHING_FOLLOWERS,
+    };
+  },
+  fetchFollowersSuccess: (payload) => {
+    return {
+      type: requestsActionTypes.FETCH_FOLLOWERS_SUCCESS,
+      payload,
+    };
+  },
+  fetchFollowersFailure: (payload) => {
+    return {
+      type: requestsActionTypes.FETCH_FOLLOWERS_FAILURE,
+      payload,
+    };
+  },
+
   // SEND_FOLLOWING_REQUEST
   sendFollowingRequest: (id, followId) => (dispatch) => {
     const request = api.sendFollowingRequest(id, followId);
 
-    dispatch({
-      type: requestsActionTypes.SENDING_FOLLOWING_REQUEST,
-    });
+    dispatch(requestsActions.sendingFollowingRequest());
 
     request.then(
       (response) =>
-        dispatch({
-          type: requestsActionTypes.SEND_FOLLOWING_REQUEST_SUCCESS,
-          payload: response.data.message,
-        }),
-      (error) =>
-        dispatch({
-          type: requestsActionTypes.SEND_FOLLOWING_REQUEST_FAILURE,
-          payload: error,
-        })
+        dispatch(
+          requestsActions.sendFollowingRequestSuccess(response.data.message)
+        ),
+      (error) => dispatch(requestsActions.sendFollowingRequestFailure(error))
     );
   },
   sendingFollowingRequest: () => {
@@ -150,35 +192,30 @@ export const requestsActions = {
   acceptFollowRequest: (id, followRequestSender) => (dispatch) => {
     const request = api.acceptFollowRequest(id, followRequestSender);
 
-    dispatch({
-      type: requestsActionTypes.ACCEPTING_FOLLOW_REQUEST,
-    });
+    dispatch(requestsActions.acceptingFollowRequest());
 
     request.then(
-      (response) =>
-        dispatch({
-          type: requestsActionTypes.ACCEPT_FOLLOW_REQUEST_SUCCESS,
-          payload: response.data.message,
-        }),
-      (error) =>
-        dispatch({
-          type: requestsActionTypes.ACCEPT_FOLLOW_REQUEST_FAILURE,
-          payload: error,
-        })
+      (response) => {
+        dispatch(
+          requestsActions.acceptFollowRequestSuccess(response.data.message)
+        );
+        dispatch(requestsActions.fetchFollowRequests(id));
+      },
+      (error) => dispatch(requestsActions.acceptFollowRequestFailure(error))
     );
   },
-  acceptingFollowingRequest: () => {
+  acceptingFollowRequest: () => {
     return {
       type: requestsActionTypes.ACCEPTING_FOLLOW_REQUEST,
     };
   },
-  acceptFollowingRequestSuccess: (payload) => {
+  acceptFollowRequestSuccess: (payload) => {
     return {
       type: requestsActionTypes.ACCEPT_FOLLOW_REQUEST_SUCCESS,
       payload,
     };
   },
-  acceptFollowingRequestFailure: (payload) => {
+  acceptFollowRequestFailure: (payload) => {
     return {
       type: requestsActionTypes.ACCEPT_FOLLOW_REQUEST_FAILURE,
       payload,
@@ -186,38 +223,33 @@ export const requestsActions = {
   },
 
   // DECLINE_FOLLOWING_REQUEST
-  declineFollowingRequest: (id, followRequestSender) => (dispatch) => {
+  declineFollowRequest: (id, followRequestSender) => (dispatch) => {
     const request = api.declineFollowRequest(id, followRequestSender);
 
-    dispatch({
-      type: requestsActionTypes.DECLINING_FOLLOW_REQUEST,
-    });
+    dispatch(requestsActions.decliningFollowRequest());
 
     request.then(
-      (response) =>
-        dispatch({
-          type: requestsActionTypes.DECLINE_FOLLOW_REQUEST_SUCCESS,
-          payload: response.data.message,
-        }),
-      (error) =>
-        dispatch({
-          type: requestsActionTypes.DECLINE_FOLLOW_REQUEST_FAILURE,
-          payload: error,
-        })
+      (response) => {
+        dispatch(
+          requestsActions.declineFollowRequestSuccess(response.data.message)
+        );
+        dispatch(requestsActions.fetchFollowRequests(id));
+      },
+      (error) => dispatch(requestsActions.declineFollowRequestFailure(error))
     );
   },
-  decliningFollowingRequest: () => {
+  decliningFollowRequest: () => {
     return {
       type: requestsActionTypes.DECLINING_FOLLOW_REQUEST,
     };
   },
-  declineFollowingRequestSuccess: (payload) => {
+  declineFollowRequestSuccess: (payload) => {
     return {
       type: requestsActionTypes.DECLINE_FOLLOW_REQUEST_SUCCESS,
       payload,
     };
   },
-  declineFollowingRequestFailure: (payload) => {
+  declineFollowRequestFailure: (payload) => {
     return {
       type: requestsActionTypes.DECLINE_FOLLOW_REQUEST_FAILURE,
       payload,
@@ -228,21 +260,14 @@ export const requestsActions = {
   removeFromFollowing: (id, removeUser) => (dispatch) => {
     const request = api.removeFromFollowing(id, removeUser);
 
-    dispatch({
-      type: requestsActionTypes.REMOVING_FROM_FOLLOWING,
-    });
+    dispatch(requestsActions.removingFromFollowing());
 
     request.then(
       (response) =>
-        dispatch({
-          type: requestsActionTypes.REMOVE_FROM_FOLLOWING_SUCCESS,
-          payload: response.data.message,
-        }),
-      (error) =>
-        dispatch({
-          type: requestsActionTypes.REMOVE_FROM_FOLLOWING_FAILURE,
-          payload: error,
-        })
+        dispatch(
+          requestsActions.removeFromFollowingSuccess(response.data.message)
+        ),
+      (error) => dispatch(requestsActions.removeFromFollowingFailure(error))
     );
   },
   removingFromFollowing: () => {
@@ -267,21 +292,14 @@ export const requestsActions = {
   removeFromFollowers: (id, removeUser) => (dispatch) => {
     const request = api.removeFromFollowers(id, removeUser);
 
-    dispatch({
-      type: requestsActionTypes.REMOVING_FROM_FOLLOWERS,
-    });
+    dispatch(requestsActions.removingFromFollowers());
 
     request.then(
       (response) =>
-        dispatch({
-          type: requestsActionTypes.REMOVE_FROM_FOLLOWERS_SUCCESS,
-          payload: response.data.message,
-        }),
-      (error) =>
-        dispatch({
-          type: requestsActionTypes.REMOVE_FROM_FOLLOWERS_FAILURE,
-          payload: error,
-        })
+        dispatch(
+          requestsActions.removeFromFollowersSuccess(response.data.message)
+        ),
+      (error) => dispatch(requestsActions.removeFromFollowersFailure(error))
     );
   },
   removingFromFollowers: () => {
@@ -306,21 +324,14 @@ export const requestsActions = {
   deleteFollowingRequest: (id, removeRequestToUser) => (dispatch) => {
     const request = api.deleteFollowingRequest(id, removeRequestToUser);
 
-    dispatch({
-      type: requestsActionTypes.DELETING_FOLLOWING_REQUEST,
-    });
+    dispatch(requestsActions.deletingFollowingRequest());
 
     request.then(
       (response) =>
-        dispatch({
-          type: requestsActionTypes.DELETE_FOLLOWING_REQUEST_SUCCESS,
-          payload: response.data.message,
-        }),
-      (error) =>
-        dispatch({
-          type: requestsActionTypes.DELETE_FOLLOWING_REQUEST_FAILURE,
-          payload: error,
-        })
+        dispatch(
+          requestsActions.deleteFollowingRequestSuccess(response.data.message)
+        ),
+      (error) => dispatch(requestsActions.deleteFollowingRequestFailure(error))
     );
   },
   deletingFollowingRequest: () => {

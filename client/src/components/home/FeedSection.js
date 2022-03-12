@@ -9,7 +9,6 @@ import '../../common/home/feed.scss';
 
 const FeedSection = () => {
   const posts = useSelector((state) => state.posts);
-  console.log(posts);
 
   return (
     <section className="Feed">

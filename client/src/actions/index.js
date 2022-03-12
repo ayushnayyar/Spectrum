@@ -1,6 +1,6 @@
 import { requestsActions, requestsActionTypes } from './requests';
 
-export const actionTypes = {
+export const ActionTypes = {
   ...requestsActionTypes,
 };
 

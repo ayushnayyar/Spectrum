@@ -5,6 +5,7 @@ import { Integrations } from '@sentry/tracing';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 
 import { rootReducer } from './reducers';
 
@@ -37,9 +38,11 @@ Sentry.init({
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// logger must be last middleware
+const middlewares = [thunk, logger];
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(...middlewares))
 );
 
 ReactDOM.render(
