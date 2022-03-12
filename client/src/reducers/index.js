@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import posts from './posts';
 import auth from './auth';
-import requests from './requests';
+import requestsReducer from './requests';
 import people from './people';
 import userPosts from './userPosts';
 import rewards from './rewards';
@@ -10,7 +10,7 @@ import rewards from './rewards';
 export const appReducer = combineReducers({
   posts,
   auth,
-  requests,
+  requestsReducer,
   people,
   userPosts,
   rewards,

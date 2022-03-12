@@ -18,6 +18,8 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+export default API;
+
 export const fetchPosts = () => {
   return API.get('/posts');
 };

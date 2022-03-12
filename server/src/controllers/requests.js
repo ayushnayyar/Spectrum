@@ -18,10 +18,6 @@ export const getFollowRequests = async (req, res) => {
       })
     );
 
-    if (followRequestsData.length === 0) {
-      return res.status(201).json({ message: "No follow requests" });
-    }
-
     res.status(201).json(followRequestsData);
   } catch (error) {
     res.sendStatus(404).json({ message: "Something went wrong" });
@@ -37,20 +33,16 @@ export const getFollowingRequests = async (req, res) => {
     }
 
     const user = await User.findOne({ _id: id });
-    console.log(user.followRequests);
+    console.log(user.followingRequests);
 
-    const followRequestsData = await Promise.all(
-      user.followRequests.map(async (followRequesterId) => {
+    const followingRequestsData = await Promise.all(
+      user.followingRequests.map(async (followRequesterId) => {
         const followRequester = await User.findOne({ _id: followRequesterId });
         return { name: followRequester.name, id: followRequesterId };
       })
     );
 
-    if (followRequestsData.length === 0) {
-      return res.status(201).json({ message: "No friend requests" });
-    }
-
-    res.status(201).json(followRequestsData);
+    res.status(201).json(followingRequestsData);
   } catch (error) {
     res.sendStatus(404).json({ message: "Something went wrong" });
   }
@@ -58,10 +50,10 @@ export const getFollowingRequests = async (req, res) => {
 
 export const sendFollowingRequest = async (req, res) => {
   const { id } = req.params;
-  const { followingId } = req.body;
+  const { followId } = req.body;
 
   try {
-    const followingUserId = String(followingId);
+    const followingUserId = String(followId);
 
     console.log(followingUserId);
 
