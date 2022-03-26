@@ -10,8 +10,8 @@
         "server": "nodemon src/index.js"
     },
     "engines": {
-        "node": "16.13.0",
-        "npm": "8.1.0"
+        "node": "17.8.0",
+        "npm": "8.5.5"
     },
     "author": "",
     "license": "ISC",

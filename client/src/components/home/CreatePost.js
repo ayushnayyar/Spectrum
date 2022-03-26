@@ -17,7 +17,7 @@ const CreatePost = () => {
   // const [postText, setPostText] = useState('');
   const [postData, setPostData] = useState({
     description: '',
-    tags: '',
+    tags: [],
     selectedFile: '',
   });
 
@@ -31,11 +31,8 @@ const CreatePost = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    dispatch(createPost({ ...postData, name: user?.result?.name }));
-
+    dispatch(createPost(postData));
     setPostData({ ...postData, description: '', selectedFile: '' });
-
     setFileKey(Date.now());
   };
 

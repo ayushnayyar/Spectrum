@@ -49,15 +49,14 @@ export const createPost = async (req, res) => {
   const post = req.body;
   // const { id } = req.params;
 
-  const newPost = new Post({
-    ...post,
-    creator: req.userId,
-  });
-
   try {
-    await newPost.save();
-
     const user = await User.findOne({ _id: req.userId });
+    const newPost = new Post({
+      ...post,
+      name: user.name,
+      creator: req.userId,
+    });
+    await newPost.save();
     user.posts = [...user.posts, newPost];
 
     await User.findByIdAndUpdate(req.userId, user, {
@@ -114,6 +113,8 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
   const { id } = req.params;
 
+  try {
+
   if (!req.userId) {
     return res.json({ message: "Unauthenticated" });
   }
@@ -123,28 +124,32 @@ export const likePost = async (req, res) => {
   }
 
   const user = await User.findOne({ _id: req.userId });
-
-  let likedPost = {};
-
   const postIndex = user.posts.findIndex((post) => post._id === id);
-
   // user.posts[postIndex].
-
   const post = await Post.findById(id);
-
-  console.log(post);
-
   const index = post.likes.findIndex((id) => id === String(req.userId));
+  const likeIndex = user.posts[postIndex].likes.findIndex((id) => id === String(req.userId));
 
-  if (index === -1) {
+  if (index === -1 && likeIndex === -1) {
     // Like
     post.likes.push(req.userId);
+    user.posts[postIndex].likes.push(req.userId);
+    post.likeCount += 1;
+    user.posts[postIndex].likeCount += 1;
   } else {
     //Dislike
     post.likes = post.likes.filter((id) => id !== String(req.userId));
+    user.posts[postIndex].likes = user.posts[postIndex].likes.filter((id) => id !== String(req.userId));
+    post.likeCount -= 1;
+    user.posts[postIndex].likeCount -= 1;
   }
 
-  const updatedPost = await Post.findByIdAndUpdate(id, post, { new: true });
+  console.log(post);
+  await Post.findByIdAndUpdate(id, post);
+  await User.findByIdAndUpdate(id, user);
 
-  res.status(201).json(updatedPost);
+  res.status(201).json({likeCount: post.likeCount});
+} catch(error) {
+  res.status(403).json(error.message);
+}
 };
